@@ -1,4 +1,6 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Put, Redirect } from "@nestjs/common";
+import {
+  Body, Controller, Delete, Get, Header, HttpCode, HttpStatus, Param, Post, Put, Redirect
+} from "@nestjs/common";
 import { CreateProductDto } from "./dto/create-product.dto";
 import { UpdateProductDto } from "./dto/update-product.dto";
 
@@ -6,15 +8,15 @@ import { UpdateProductDto } from "./dto/update-product.dto";
 export class ProductsController {
 
   @Get()
-  // @Redirect('http://localhost:3000/products/1', 301)
   getAll(): string {
     return 'getAll products'
   }
 
-  // @Get(':id')
-  // getOne(@Param() params) {
-  //   return 'getOne ' + params.id
-  // }
+  @Get('/redirect')
+  @Redirect('http://localhost:3000/products/1', HttpStatus.MOVED_PERMANENTLY)
+  redirect() {
+    return 'redirect'
+  }
 
   @Get(':id')
   getById(@Param('id') id: string): string {
@@ -23,6 +25,7 @@ export class ProductsController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
+  @Header('Cache-Control', 'none')
   create(@Body() createProductDto: CreateProductDto): string {
     return `create title: ${createProductDto.title} price: ${createProductDto.price}`
   }
