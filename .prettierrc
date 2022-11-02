@@ -1,4 +1,25 @@
 {
+  "trailingComma": "none",
+  "tabWidth": 2,
+  "useTabs": true,
+  "semi": false,
   "singleQuote": true,
-  "trailingComma": "all"
+  "importOrder": [
+    "<THIRD_PARTY_MODULES>",
+    "^page/(.*)$",
+    "^components/(.*)$",
+    "^screens/(.*)$",
+    "^ui/(.*)$",
+    "^hooks/(.*)$",
+    "^shared/(.*)$",
+    "^services/(.*)$",
+    "^assets/(.*)$",
+    "^utils/(.*)$",
+    "^config/(.*)$",
+    "^store/(.*)$",
+    "^../(.*)",
+    "^./(.*)"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
 }
