@@ -28,6 +28,9 @@ constructor (@InjectModel(Product) private readonly productRepository: typeof Pr
   async create(productDto: CreateProductDto): Promise<Product> {
     //const newProduct = new this.productModel(productDto)
     //return newProduct.save()
+    if (!productDto.price || !productDto.title) {
+      throw 'Price or Title not specified'
+    }
     return await this.productRepository
     .create<Product>(productDto)
   }
@@ -43,6 +46,9 @@ constructor (@InjectModel(Product) private readonly productRepository: typeof Pr
 
   async update(id: string, productDto: UpdateProductDto): Promise<Product> {
     //return this.productModel.findByIdAndUpdate(id, productDto, { new: true })
+    if (!productDto.price || !productDto.title) {
+      throw 'Price or Title not specified'
+    }
     const product = await this.getById(id)
     product.set(productDto)
     return await product.save()
