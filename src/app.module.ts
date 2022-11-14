@@ -10,6 +10,7 @@ import { Product } from "./products/model/product.model";
 import { ProductsModule } from './products/products.module';
 import { UsersModule } from './users/users.module';
 import { RolesModule } from './roles/roles.module';
+import { RolesUsersModule } from './roles_users/roles_users.module';
 
 @Module({
   imports: [
@@ -24,8 +25,6 @@ import { RolesModule } from './roles/roles.module';
       driver: ApolloDriver
     }),
     ProductsModule,
-    UsersModule,
-    RolesModule,
     MongooseModule.forRoot(
       `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.qgn0k.mongodb.net/`+
         `${process.env.MONGO_DB}?retryWrites=true&w=majority`),
@@ -39,7 +38,10 @@ import { RolesModule } from './roles/roles.module';
       synchronize: true,
       logging: true,
       models: [Product],
-    })
+    }),
+    UsersModule,
+    RolesModule,
+    RolesUsersModule
   ],
   controllers: [AppController],
   providers: [AppService],
